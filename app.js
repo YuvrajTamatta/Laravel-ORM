@@ -31,25 +31,25 @@ $(function () {
     })
 
     // Editing 
- $('body').on('click','#edit',function(){
-    $(this).attr('data-bs-toggle', 'modal')
-    $(this).attr('data-bs-target','#exampleModal')
-    let id = $(this).val()
+    $('body').on('click', '#edit', function () {
+        $(this).attr('data-bs-toggle', 'modal')
+        $(this).attr('data-bs-target', '#exampleModal')
+        let id = $(this).val()
         $.ajax({
             url: 'action.php',
             type: 'get',
             data: { action: 'check_avaibility', data: id },
             dataType: 'json',
-        success: function (res) {
-           $("#id").val(res.id)
-           $("#name").val(res.name)
-           $("#email").val(res.email)
-           $("#phone").val(res.phone)
-           $("#address").val(res.address)
-        
-        }
+            success: function (res) {
+                $("#id").val(res.id)
+                $("#name").val(res.name)
+                $("#email").val(res.email)
+                $("#phone").val(res.phone)
+                $("#address").val(res.address)
+
+            }
+        })
     })
- })
 
 
     //Get Sorted Data
@@ -170,7 +170,7 @@ $(function () {
     //Insert Data Or Update Data
     $('body').on('submit', '#myform', function (e) {
         e.preventDefault();
-        let formdata = $(this).serialize();          
+        let formdata = $(this).serialize();
         $.ajax({
             url: 'action.php',
             type: 'post',
@@ -180,10 +180,10 @@ $(function () {
                 $('#myform').trigger('reset');
                 alert("Data Inserted");
             },
-            
+
         });
     });
-    
+
 
     //find by Id
     $('body').on('click', '#find_by_id', function () {
@@ -247,21 +247,55 @@ $(function () {
     })
 
     // Delete Record
-    $('body').on('click',"#delete_record",function(){
-        let id = prompt("Enter id you want to delete")        
+    $('body').on('click', "#delete_record", function () {
+        let id = prompt("Enter id you want to delete")
         $.ajax({
-            url:'action.php',
-            type:'get',
-            data:{action:'delete', data:id},
-            success:function(res){
-                  
+            url: 'action.php',
+            type: 'get',
+            data: { action: 'delete', data: id },
+            success: function (res) {
+
                 $('thead').hide()
-                $('result').empty()                               
-                    $("#result").html(`<div class="alert alert-danger" role="alert">${res}</div>`)                   
-                                  
-               
+                $('result').empty()
+                $("#result").html(`<div class="alert alert-danger" role="alert">${res}</div>`)
+
+
 
             }
+        })
+
+    })
+
+    // where_between
+    $('body').on('click', '#where_between', function () {
+        let first = prompt('Enter from records Ids:')
+        let second = prompt("Enter to records Ids:")
+        $.ajax({
+            url: "action.php",
+            type: "get",
+            data: {
+                action: "where_between",
+                first:first,
+                second: second
+            },
+            dataType: 'json',
+            success:function(res){
+                $('#heading').text(`Rows between ${first} to ${second}`)
+                $('#result').empty()
+                $.each(res, function (ind, val) {
+                    $('#result').append(`
+                    <tr>
+                    <td>${val.id}</td>
+                    <td>${val.name}</td>
+                    <td>${val.email}</td>
+                    <td>${val.phone}</td>
+                    <td>${val.address}</td>
+                    </tr>
+                    `)
+                })
+                
+            }
+
         })
 
     })

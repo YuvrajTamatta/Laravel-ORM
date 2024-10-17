@@ -5,7 +5,6 @@
 	require "./includes/kint-config.php";
 
 	use Illuminate\Database\Capsule\Manager as Capsule;
-	use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 

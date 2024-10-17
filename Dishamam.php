@@ -44,6 +44,8 @@
         <button class="btn btn-success btn-sm" id="find_by_id"> Find By Id </button>
         <button class="btn btn-success btn-sm" id="check_avaibility">Check Avaibility </button>
         <button class="btn btn-success btn-sm" id="delete_record"> Delete Record </button>
+        <button class="btn btn-success btn-sm" id="where_between"> Where Between </button>
+
 
 
         <!-- Modal -->

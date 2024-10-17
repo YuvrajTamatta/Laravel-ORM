@@ -28,7 +28,7 @@ class getData
     // Doubt need to asking
     public function distinct_row()
     {
-        $result = Customers::distinct()->get();
+        $result = Customers::select('id','name','phone','address')->groupBy('name')->get();
         return $result;
     }
 
@@ -85,6 +85,11 @@ class getData
         $quey = Customers::where('id', $id)->delete();
         return $quey;
     }
+
+    public function where_between($first, $second){
+        $result = Customers::whereBetween('id',[$first, $second])->get();
+        return $result;
+    }
 }
 
 
@@ -120,6 +125,9 @@ if (isset($_GET['action'])) {
         case "delete":
             echo json_encode($ob->deletedata($_GET['data']) ? "Delete Successfull": "Not found" );
             break;
+        case "where_between":
+            echo json_encode($ob->where_between($_GET['first'],$_GET['second'])->toArray());
+            break; 
 
 
     endswitch;

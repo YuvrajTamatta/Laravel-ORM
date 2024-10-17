@@ -21,10 +21,10 @@ require_once __DIR__ . "/includes/connection.php";
 //$customer=Customers::whereDate('created_at', now())->get();
 // $customer = Customers::whereBetween('id',[5,10])->get();
 // $customer = Customers::where('id','>',20)->where('id', '<', 30)->get();
-// $customer = Customers::pluck('name');
+// $customer = Customers::where('name','harry potter')->pluck('name');
 // $customer = Customers::orderBy('name','desc')->get();
 // $customer=Customers::limit(3)->get();
-
+$customer=Customers::select('name')->distinct()->get();
 
 // Create
 //$customer=Customers::create(['name'=>'yuvraj tamatta','email'=>'uv@gmail.com','phone'=>'123456987','address'=>'123 main street']);
@@ -47,9 +47,10 @@ require_once __DIR__ . "/includes/connection.php";
 //  $customer = Customers::with('orders')->get();
 // $customer = Customers::where('name','spiderman')->count();
 // $customer=Customers::chunk(3,function($customer){foreach($customer as $cus){
-// 	echo '<pre>';
-// 	print_r($cus->toArray());
-// 	echo '</pre>';
-// }});
+
+	echo '<pre>';
+	print_r($customer->toArray());
+	echo '</pre>';
+
 
 
