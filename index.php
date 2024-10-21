@@ -1,7 +1,5 @@
 <?php
 
-use function Symfony\Component\Clock\now;
-use Illuminate\Support\Facades\Schema;
 
 use App\Customers;
 
@@ -24,7 +22,11 @@ require_once __DIR__ . "/includes/connection.php";
 // $customer = Customers::where('name','harry potter')->pluck('name');
 // $customer = Customers::orderBy('name','desc')->get();
 // $customer=Customers::limit(3)->get();
-$customer=Customers::select('name')->distinct()->get();
+// $customer=Customers::select('name')->distinct()->get();
+$customer = Customers::join('contacts', 'users.id', '=', 'contacts.user_id')
+->join('orders', 'users.id', '=', 'orders.user_id')
+->select('users.id', 'contacts.phone', 'orders.price')
+->get();
 
 // Create
 //$customer=Customers::create(['name'=>'yuvraj tamatta','email'=>'uv@gmail.com','phone'=>'123456987','address'=>'123 main street']);
