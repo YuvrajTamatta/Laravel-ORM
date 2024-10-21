@@ -1,7 +1,5 @@
 <?php
 
-use function Symfony\Component\Clock\now;
-
 use App\Customers;
 
 require_once __DIR__ . "/includes/connection.php";
